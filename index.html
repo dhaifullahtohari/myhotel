@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>فندق الطوهري</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-color: #003f66;
+      --accent-color: #ffffff;
+      --text-color: #1c1c1c;
+      --bg-color: #f0f4f8;
+      --button-color: #005f99;
+      --button-hover: #004471;
+      --gold-color: #c59d49;
+      --gold-hover: #b5893a;
+      --available: #4caf50;
+      --occupied: #e53935;
+      --maintenance: #fbc02d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      padding-top: 70px;
+      padding-bottom: 70px;
+    }
+
+    header {
+      background-color: var(--main-color);
+      color: var(--accent-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 999;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-title img {
+      height: 40px;
+    }
+
+    .logo-title h1 {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .burger {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .back-btn {
+      background: var(--gold-color);
+      color: white;
+      border: none;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover {
+      background: var(--gold-hover);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: var(--main-color);
+        flex-direction: column;
+        width: 100%;
+        display: none;
+      }
+
+      nav.show {
+        display: flex;
+      }
+
+      .burger {
+        display: block;
+      }
+    }
+
+    .video-banner {
+      position: relative;
+      width: 100%;
+      max-height: 90vh;
+      overflow: hidden;
+    }
+
+    .video-banner video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 16/9;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 90px;
+    }
+
+    .btn {
+      background: var(--button-color);
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      background: var(--button-hover);
+    }
+
+    .status-banner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+    }
+
+    .room-status {
+      text-align: center;
+      padding: 1rem;
+      border-radius: 10px;
+      width: 140px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .room-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .available { background-color: var(--available); color: white; }
+    .occupied { background-color: var(--occupied); color: white; }
+    .maintenance { background-color: var(--maintenance); color: black; }
+
+    section {
+      margin: 3rem auto;
+      max-width: 90%;
+    }
+
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: 2px solid var(--main-color);
+      border-radius: 10px;
+    }
+
+    footer {
+      background: var(--main-color);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 998;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- رأس الصفحة -->
+  <header>
+    <div class="logo-title">
+      <img src="myhotelicon.png" alt="شعار الفندق">
+      <h1>فندق الطوهري</h1>
+    </div>
+    <button class="burger" onclick="toggleMenu()">☰</button>
+    <nav id="main-nav">
+      <a href="#booking">الحجز</a>
+      <a href="#gallery">المعرض</a>
+      <a href="#admin">الإدارة</a>
+      <button class="back-btn" onclick="window.history.back()">العودة</button>
+    </nav>
+  </header>
+
+  <!-- بنر الفيديو -->
+  <div class="video-banner">
+    <video src="myhotelads.mp4" autoplay muted loop playsinline></video>
+    <div class="video-overlay">
+      <a class="btn" href="#booking">احجز الآن</a>
+    </div>
+  </div>
+
+  <!-- حالة الغرف -->
+  <section class="status-banner" id="rooms"></section>
+
+  <!-- الحجز -->
+  <section id="booking">
+    <h2>نموذج الحجز</h2>
+    <iframe src="booking.html" title="نموذج الحجز"></iframe>
+  </section>
+
+  <!-- المعرض -->
+  <section id="gallery">
+    <h2>معرض الصور</h2>
+    <iframe src="gallery.html" title="معرض الصور"></iframe>
+  </section>
+
+  <!-- لوحة التحكم -->
+  <section id="admin">
+    <h2>لوحة تحكم الإدارة</h2>
+    <iframe src="admin.html" title="لوحة الإدارة"></iframe>
+  </section>
+
+  <!-- التذييل -->
+  <footer>
+    &copy; 2025 فندق الطوهري. جميع الحقوق محفوظة.
+  </footer>
+
+  <!-- سكربت -->
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('main-nav');
+      nav.classList.toggle('show');
+    }
+
+    const roomList = document.getElementById('rooms');
+    const totalRooms = 30;
+    const totalSuites = 10;
+    const states = ['available', 'occupied', 'maintenance'];
+
+    function getLabel(state) {
+      return {
+        'available': 'متاح',
+        'occupied': 'مشغول',
+        'maintenance': 'تحت الصيانة'
+      }[state];
+    }
+
+    for (let i = 1; i <= totalRooms; i++) {
+      const state = states[Math.floor(Math.random() * states.length)];
+      roomList.innerHTML += `
+        <div class="room-status ${state}">
+          <div class="room-icon">🛏️</div>
+          <strong>غرفة ${i}</strong>
+          <small>${getLabel(state)}</small>
+        </div>`;
+    }
+
+    for (let i = 1; i <= totalSuites; i++) {
+      const state = states[Math.floor(Math.random() * states.length)];
+      roomList.innerHTML += `
+        <div class="room-status ${state}">
+          <div class="room-icon">🏨</div>
+          <strong>جناح ${i}</strong>
+          <small>${getLabel(state)}</small>
+        </div>`;
+    }
+  </script>
+
+</body>
+</html>
