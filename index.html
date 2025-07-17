@@ -11,13 +11,11 @@
       --accent-color: #ffffff;
       --bg-color: #f5f7fa;
       --text-color: #1c1c1c;
-      --button-color: #ff9800;
-      --button-hover: #e68900;
-      --gold-color: #c59d49;
-      --gold-hover: #b5893a;
-      --available: #3fa87c;
-      --occupied: #d1655d;
-      --maintenance: #c1a13f;
+      --btn-color: #ff9800;
+      --btn-hover: #e68a00;
+      --available: #4caf50;
+      --occupied: #e74c3c;
+      --maintenance: #f1c40f;
     }
 
     * {
@@ -35,7 +33,7 @@
 
     header {
       background-color: var(--main-color);
-      color: white;
+      color: var(--accent-color);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -44,7 +42,8 @@
       top: 0;
       left: 0;
       right: 0;
-      z-index: 999;
+      z-index: 1000;
+      flex-wrap: wrap;
     }
 
     .logo {
@@ -54,12 +53,13 @@
     }
 
     .logo img {
-      height: 40px;
+      height: 36px;
     }
 
     .logo h1 {
       font-size: 1.2rem;
       margin: 0;
+      color: var(--accent-color);
     }
 
     nav {
@@ -75,78 +75,91 @@
       font-size: 0.95rem;
     }
 
-    .back-btn {
-      background-color: var(--gold-color);
+    .btn-book {
+      background-color: var(--btn-color);
       color: white;
       border: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-      font-size: 0.85rem;
-    }
-
-    .back-btn:hover {
-      background-color: var(--gold-hover);
-    }
-
-    .header-center-button {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .highlight-btn {
-      background-color: var(--button-color);
-      color: white;
       padding: 0.5rem 1.2rem;
-      font-weight: bold;
-      font-size: 1rem;
-      border: none;
+      font-size: 0.95rem;
       border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
       text-decoration: none;
+      transition: background 0.3s;
     }
 
-    .highlight-btn:hover {
-      background-color: var(--button-hover);
-      transform: scale(1.05);
+    .btn-book:hover {
+      background-color: var(--btn-hover);
+    }
+
+    .burger {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .book-wrapper {
+      flex: 1;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        background: var(--main-color);
+        width: 100%;
+        padding: 0.5rem;
+      }
+
+      nav.show {
+        display: flex;
+      }
+
+      .burger {
+        display: block;
+      }
+
+      .book-wrapper {
+        width: 100%;
+        margin-top: 0.5rem;
+      }
     }
 
     .video-banner {
       width: 100%;
-      max-height: 90vh;
       overflow: hidden;
     }
 
     .video-banner video {
       width: 100%;
-      height: 100%;
       object-fit: cover;
+      max-height: 70vh;
     }
 
     .status-banner {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 1rem;
       padding: 2rem 1rem;
     }
 
     .room-status {
-      text-align: center;
-      padding: 1rem;
+      background: white;
       border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.2s;
     }
 
     .room-status:hover {
-      transform: scale(1.03);
+      transform: translateY(-5px);
     }
 
     .room-icon {
-      font-size: 2.3rem;
+      font-size: 2rem;
       margin-bottom: 0.5rem;
     }
 
@@ -162,7 +175,7 @@
 
     .maintenance {
       background-color: var(--maintenance);
-      color: white;
+      color: black;
     }
 
     footer {
@@ -175,69 +188,30 @@
       bottom: 0;
       left: 0;
       right: 0;
-      z-index: 998;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        background-color: var(--main-color);
-        position: absolute;
-        top: 60px;
-        right: 0;
-        display: none;
-        width: 100%;
-      }
-
-      nav.show {
-        display: flex;
-      }
-
-      .burger {
-        display: block;
-        font-size: 1.5rem;
-        background: none;
-        border: none;
-        color: white;
-        cursor: pointer;
-      }
-
-      .header-center-button {
-        position: static;
-        transform: none;
-        margin-top: 0.5rem;
-      }
-    }
-
-    .burger {
-      display: none;
     }
   </style>
 </head>
 <body>
 
+  <!-- الشريط العلوي -->
   <header>
+    <button class="burger" onclick="toggleMenu()">☰</button>
     <div class="logo">
-      <img src="myhotelicon.png" alt="شعار الفندق" />
+      <img src="myhotelicon.png" alt="شعار الفندق">
       <h1>فندق الطوهري</h1>
     </div>
-
-    <!-- زر احجز الآن في المنتصف -->
-    <div class="header-center-button">
-      <a href="booking.html" class="highlight-btn">احجز الآن</a>
+    <div class="book-wrapper">
+      <a class="btn-book" href="booking.html">احجز الآن</a>
     </div>
-
-    <button class="burger" onclick="toggleMenu()">☰</button>
     <nav id="main-nav">
       <a href="index.html">الرئيسية</a>
       <a href="booking.html">الحجز</a>
       <a href="gallery.html">المعرض</a>
       <a href="admin.html">الإدارة</a>
-      <button class="back-btn" onclick="history.back()">العودة</button>
     </nav>
   </header>
 
-  <!-- الفيديو الترويجي -->
+  <!-- الفيديو -->
   <div class="video-banner">
     <video src="myhotelads.mp4" autoplay muted loop playsinline></video>
   </div>
@@ -252,8 +226,7 @@
 
   <script>
     function toggleMenu() {
-      const nav = document.getElementById('main-nav');
-      nav.classList.toggle('show');
+      document.getElementById('main-nav').classList.toggle('show');
     }
 
     const roomList = document.getElementById('rooms');
@@ -267,20 +240,18 @@
 
     for (let i = 1; i <= totalRooms; i++) {
       const s = states[Math.floor(Math.random() * states.length)];
-      roomList.innerHTML += `
-        <div class="room-status ${s}">
-          <div class="room-icon">🛏️</div>
-          <strong>غرفة ${i}</strong><br><small>${getLabel(s)}</small>
-        </div>`;
+      roomList.innerHTML += `<div class="room-status ${s}">
+        <div class="room-icon">🛏️</div>
+        <strong>غرفة ${i}</strong><br><small>${getLabel(s)}</small>
+      </div>`;
     }
 
     for (let i = 1; i <= totalSuites; i++) {
       const s = states[Math.floor(Math.random() * states.length)];
-      roomList.innerHTML += `
-        <div class="room-status ${s}">
-          <div class="room-icon">🏩</div>
-          <strong>جناح ${i}</strong><br><small>${getLabel(s)}</small>
-        </div>`;
+      roomList.innerHTML += `<div class="room-status ${s}">
+        <div class="room-icon">🏨</div>
+        <strong>جناح ${i}</strong><br><small>${getLabel(s)}</small>
+      </div>`;
     }
   </script>
 
