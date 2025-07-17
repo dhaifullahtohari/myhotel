@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>فندق الطوهري</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --main-color: #003f66;
@@ -20,9 +20,7 @@
       --maintenance: #fbc02d;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -33,95 +31,18 @@
       padding-bottom: 70px;
     }
 
-    header {
+    header, footer {
       background-color: var(--main-color);
-      color: var(--accent-color);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.5rem 1rem;
+      color: white;
+      text-align: center;
+      padding: 1rem;
       position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
+      width: 100%;
       z-index: 999;
     }
 
-    .logo-title {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .logo-title img {
-      height: 40px;
-    }
-
-    .logo-title h1 {
-      font-size: 1.2rem;
-      margin: 0;
-    }
-
-    nav {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    .burger {
-      display: none;
-      font-size: 1.8rem;
-      background: none;
-      border: none;
-      color: white;
-      cursor: pointer;
-    }
-
-    .back-btn {
-      background: var(--gold-color);
-      color: white;
-      border: none;
-      padding: 0.4rem 0.9rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: background 0.3s;
-    }
-
-    .back-btn:hover {
-      background: var(--gold-hover);
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        position: absolute;
-        top: 60px;
-        right: 0;
-        background: var(--main-color);
-        flex-direction: column;
-        width: 100%;
-        display: none;
-      }
-
-      nav.show {
-        display: flex;
-      }
-
-      .burger {
-        display: block;
-      }
-    }
+    header { top: 0; }
+    footer { bottom: 0; }
 
     .video-banner {
       position: relative;
@@ -190,125 +111,79 @@
     .occupied { background-color: var(--occupied); color: white; }
     .maintenance { background-color: var(--maintenance); color: black; }
 
-    section {
-      margin: 3rem auto;
-      max-width: 90%;
-    }
-
-    iframe {
-      width: 100%;
-      height: 500px;
-      border: 2px solid var(--main-color);
-      border-radius: 10px;
-    }
-
-    footer {
-      background: var(--main-color);
+    .back-btn {
+      background: var(--gold-color);
       color: white;
-      padding: 1rem;
-      text-align: center;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 998;
+      border: none;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover {
+      background: var(--gold-hover);
+    }
+
+    @media (max-width: 768px) {
+      .room-status { width: 100%; }
+      .btn { font-size: 0.9rem; padding: 0.5rem 1rem; }
     }
   </style>
 </head>
 <body>
 
   <!-- رأس الصفحة -->
-  <header>
-    <div class="logo-title">
-      <img src="myhotelicon.png" alt="شعار الفندق">
-      <h1>فندق الطوهري</h1>
-    </div>
-    <button class="burger" onclick="toggleMenu()">☰</button>
-    <nav id="main-nav">
-      <a href="#booking">الحجز</a>
-      <a href="#gallery">المعرض</a>
-      <a href="#admin">الإدارة</a>
-      <button class="back-btn" onclick="window.history.back()">العودة</button>
-    </nav>
-  </header>
+  <div id="header-placeholder"></div>
 
-  <!-- بنر الفيديو -->
+  <!-- فيديو دعائي -->
   <div class="video-banner">
     <video src="myhotelads.mp4" autoplay muted loop playsinline></video>
     <div class="video-overlay">
-      <a class="btn" href="#booking">احجز الآن</a>
+      <a class="btn" href="booking.html">احجز الآن</a>
     </div>
   </div>
 
   <!-- حالة الغرف -->
   <section class="status-banner" id="rooms"></section>
 
-  <!-- الحجز -->
-  <section id="booking">
-    <h2>نموذج الحجز</h2>
-    <iframe src="booking.html" title="نموذج الحجز"></iframe>
-  </section>
-
-  <!-- المعرض -->
-  <section id="gallery">
-    <h2>معرض الصور</h2>
-    <iframe src="gallery.html" title="معرض الصور"></iframe>
-  </section>
-
-  <!-- لوحة التحكم -->
-  <section id="admin">
-    <h2>لوحة تحكم الإدارة</h2>
-    <iframe src="admin.html" title="لوحة الإدارة"></iframe>
-  </section>
-
   <!-- التذييل -->
-  <footer>
-    &copy; 2025 فندق الطوهري. جميع الحقوق محفوظة.
-  </footer>
+  <div id="footer-placeholder"></div>
 
-  <!-- سكربت -->
   <script>
-    function toggleMenu() {
-      const nav = document.getElementById('main-nav');
-      nav.classList.toggle('show');
-    }
+    // تحميل رأس وتذييل الصفحة
+    fetch('header.html').then(res => res.text()).then(data => {
+      document.getElementById('header-placeholder').innerHTML = data;
+    });
 
+    fetch('footer.html').then(res => res.text()).then(data => {
+      document.getElementById('footer-placeholder').innerHTML = data;
+    });
+
+    // توليد حالة الغرف
     const roomList = document.getElementById('rooms');
-    const totalRooms = 30;
-    const totalSuites = 10;
+    const totalRooms = 30, totalSuites = 10;
     const states = ['available', 'occupied', 'maintenance'];
-
-    function getLabel(state) {
-      return {
-        'available': 'متاح',
-        'occupied': 'مشغول',
-        'maintenance': 'تحت الصيانة'
-      }[state];
-    }
+    const getLabel = s => ({ available: 'متاح', occupied: 'مشغول', maintenance: 'تحت الصيانة' }[s]);
 
     for (let i = 1; i <= totalRooms; i++) {
-      const state = states[Math.floor(Math.random() * states.length)];
-      roomList.innerHTML += `
-        <div class="room-status ${state}">
-          <div class="room-icon">🛏️</div>
-          <strong>غرفة ${i}</strong>
-          <small>${getLabel(state)}</small>
-        </div>`;
+      const s = states[Math.floor(Math.random() * states.length)];
+      roomList.innerHTML += `<div class="room-status ${s}">
+        <div class="room-icon">🛏️</div>
+        <strong>غرفة ${i}</strong><br><small>${getLabel(s)}</small>
+      </div>`;
     }
 
     for (let i = 1; i <= totalSuites; i++) {
-      const state = states[Math.floor(Math.random() * states.length)];
-      roomList.innerHTML += `
-        <div class="room-status ${state}">
-          <div class="room-icon">🏨</div>
-          <strong>جناح ${i}</strong>
-          <small>${getLabel(state)}</small>
-        </div>`;
+      const s = states[Math.floor(Math.random() * states.length)];
+      roomList.innerHTML += `<div class="room-status ${s}">
+        <div class="room-icon">🏨</div>
+        <strong>جناح ${i}</strong><br><small>${getLabel(s)}</small>
+      </div>`;
     }
   </script>
 
 </body>
 </html>
-الالالالا 
-تتنلتنلنتلل
-kjhgkjhjkhkgf

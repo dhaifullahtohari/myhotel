@@ -1,79 +1,109 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>لوحة تحكم الإدارة</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة الإدارة | فندق الطوهري</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --main-color: #003f66;
+      --gold-color: #c59d49;
+      --gold-hover: #b5893a;
+      --bg-color: #f0f4f8;
+      --text-color: #1c1c1c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Cairo', sans-serif;
-      background: #f1f1f1;
+      margin: 0;
       padding: 2rem;
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
     }
 
-    h2 {
+    h1 {
       text-align: center;
-      color: #004e92;
-      margin-bottom: 2rem;
+      color: var(--main-color);
+      margin-bottom: 1rem;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    .admin-panel {
+      max-width: 800px;
+      margin: auto;
       background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
-    th, td {
-      padding: 1rem;
-      border: 1px solid #ccc;
+    .admin-panel p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
       text-align: center;
     }
 
-    th {
-      background: #004e92;
-      color: white;
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
 
-    select {
-      padding: 0.4rem;
+    .actions button {
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: var(--main-color);
+      color: white;
+      transition: background 0.3s;
+    }
+
+    .actions button:hover {
+      background-color: #002e4d;
+    }
+
+    .btn-back {
+      margin-top: 2rem;
+      background-color: var(--gold-color);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.3rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-back:hover {
+      background-color: var(--gold-hover);
     }
   </style>
 </head>
 <body>
 
-  <h2>لوحة تحكم الغرف</h2>
+  <h1>لوحة التحكم الإدارية</h1>
 
-  <table>
-    <tr>
-      <th>رقم</th>
-      <th>النوع</th>
-      <th>الحالة</th>
-    </tr>
-    <!-- مثال: كرر الصف حسب الحاجة -->
-    <tr>
-      <td>101</td>
-      <td>غرفة</td>
-      <td>
-        <select>
-          <option>متاح</option>
-          <option>مشغول</option>
-          <option>تحت الصيانة</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>201</td>
-      <td>جناح</td>
-      <td>
-        <select>
-          <option>متاح</option>
-          <option selected>مشغول</option>
-          <option>تحت الصيانة</option>
-        </select>
-      </td>
-    </tr>
-  </table>
+  <div class="admin-panel">
+    <p>مرحبًا بك في لوحة تحكم إدارة فندق الطوهري. من هنا يمكنك إدارة بيانات الغرف والأجنحة ومتابعة الحجوزات.</p>
+
+    <div class="actions">
+      <button onclick="alert('فتح صفحة إدارة الغرف')">إدارة الغرف</button>
+      <button onclick="alert('فتح صفحة إدارة الأجنحة')">إدارة الأجنحة</button>
+      <button onclick="alert('عرض قائمة الحجوزات')">عرض الحجوزات</button>
+      <button onclick="alert('إرسال إشعارات للعملاء')">إرسال إشعار للعملاء</button>
+    </div>
+  </div>
+
+  <button class="btn-back" onclick="history.back()">العودة</button>
 
 </body>
 </html>
