@@ -2,43 +2,89 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>نموذج الحجز | فندق الطوهري</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --main-color: #003f66;
-      --gold-color: #c59d49;
-      --gold-hover: #b5893a;
       --bg-color: #f0f4f8;
       --text-color: #1c1c1c;
+      --gold-color: #c59d49;
+      --gold-hover: #b5893a;
+      --button-color: #005f99;
+      --button-hover: #004471;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      padding: 2rem;
+      padding: 0;
       font-family: 'Cairo', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
+      padding-top: 70px;
+      padding-bottom: 60px;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 1rem;
-      color: var(--main-color);
+    header {
+      background-color: var(--main-color);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7rem 1rem;
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 1000;
     }
 
-    form {
-      max-width: 600px;
-      margin: 0 auto;
-      background: white;
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .logo h1 {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .back-btn {
+      background-color: var(--gold-color);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover {
+      background-color: var(--gold-hover);
+    }
+
+    main {
+      max-width: 700px;
+      margin: 2rem auto;
+      background-color: white;
       padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--main-color);
+      margin-bottom: 1.5rem;
     }
 
     label {
@@ -50,114 +96,120 @@
     input, select, textarea {
       width: 100%;
       padding: 0.6rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
     }
 
-    textarea {
-      resize: vertical;
-    }
+    textarea { resize: vertical; }
 
     .btn-submit {
-      background-color: var(--main-color);
+      width: 100%;
+      background-color: var(--button-color);
       color: white;
-      padding: 0.7rem 2rem;
-      font-size: 1rem;
       border: none;
+      padding: 0.8rem;
+      font-size: 1.1rem;
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s;
     }
 
     .btn-submit:hover {
-      background-color: #002f4d;
+      background-color: var(--button-hover);
     }
 
-    .btn-back {
-      background-color: var(--gold-color);
+    footer {
+      background-color: var(--main-color);
       color: white;
-      border: none;
-      padding: 0.5rem 1.2rem;
-      font-size: 0.95rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-      display: block;
-      margin: 2rem auto 0;
-    }
-
-    .btn-back:hover {
-      background-color: var(--gold-hover);
-    }
-
-    .note {
+      text-align: center;
+      padding: 1rem;
       font-size: 0.9rem;
-      color: gray;
-      margin-top: -1rem;
-      margin-bottom: 1rem;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
 
     @media (max-width: 600px) {
-      form {
-        padding: 1.5rem;
+      main {
+        padding: 1.5rem 1rem;
+      }
+
+      .btn-submit {
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <h1>نموذج الحجز</h1>
+  <!-- رأس الصفحة -->
+  <header>
+    <div class="logo">
+      <img src="myhotelicon.png" alt="شعار الفندق">
+      <h1>فندق الطوهري</h1>
+    </div>
+    <button class="back-btn" onclick="history.back()">العودة</button>
+  </header>
 
-  <form onsubmit="return validateForm()">
-    <label for="name">الاسم الكامل</label>
-    <input type="text" id="name" name="name" required>
+  <!-- نموذج الحجز -->
+  <main>
+    <h2>نموذج حجز غرفة أو جناح</h2>
+    <form onsubmit="return validateForm()">
+      <label for="name">الاسم الكامل</label>
+      <input type="text" id="name" required>
 
-    <label for="id">رقم الهوية / الجواز</label>
-    <input type="text" id="id" name="id" required>
+      <label for="id">رقم الهوية / الجواز</label>
+      <input type="text" id="id" required>
 
-    <label for="phone">رقم الجوال</label>
-    <input type="tel" id="phone" name="phone" required>
+      <label for="phone">رقم الجوال</label>
+      <input type="tel" id="phone" required>
 
-    <label for="email">البريد الإلكتروني</label>
-    <input type="email" id="email" name="email" required>
+      <label for="email">البريد الإلكتروني</label>
+      <input type="email" id="email" required>
 
-    <label for="type">نوع الحجز</label>
-    <select id="type" name="type" required>
-      <option value="">اختر نوع الحجز</option>
-      <option value="غرفة">غرفة</option>
-      <option value="جناح">جناح</option>
-    </select>
+      <label for="type">نوع الحجز</label>
+      <select id="type" required>
+        <option value="">-- اختر --</option>
+        <option value="غرفة">غرفة</option>
+        <option value="جناح">جناح</option>
+      </select>
 
-    <label for="guests">عدد النزلاء</label>
-    <input type="number" id="guests" name="guests" min="1" required>
+      <label for="guests">عدد النزلاء</label>
+      <input type="number" id="guests" min="1" required>
 
-    <label for="checkin">تاريخ الوصول</label>
-    <input type="date" id="checkin" name="checkin" required>
+      <label for="checkin">تاريخ الوصول</label>
+      <input type="date" id="checkin" required>
 
-    <label for="checkout">تاريخ المغادرة</label>
-    <input type="date" id="checkout" name="checkout" required>
+      <label for="checkout">تاريخ المغادرة</label>
+      <input type="date" id="checkout" required>
 
-    <label for="notes">ملاحظات إضافية (اختياري)</label>
-    <textarea id="notes" name="notes" rows="3" placeholder="اكتب ملاحظاتك إن وجدت..."></textarea>
+      <label for="notes">ملاحظات إضافية (اختياري)</label>
+      <textarea id="notes" rows="3" placeholder="أي تفاصيل إضافية تود ذكرها..."></textarea>
 
-    <button type="submit" class="btn-submit">تأكيد الحجز</button>
-  </form>
+      <button type="submit" class="btn-submit">تأكيد الحجز</button>
+    </form>
+  </main>
 
-  <button class="btn-back" onclick="history.back()">العودة</button>
+  <!-- التذييل -->
+  <footer>
+    &copy; 2025 فندق الطوهري - جميع الحقوق محفوظة.
+  </footer>
 
+  <!-- التحقق من التواريخ -->
   <script>
     function validateForm() {
       const checkin = new Date(document.getElementById('checkin').value);
       const checkout = new Date(document.getElementById('checkout').value);
 
       if (checkout <= checkin) {
-        alert("تاريخ المغادرة يجب أن يكون بعد تاريخ الوصول");
+        alert("⚠️ تاريخ المغادرة يجب أن يكون بعد تاريخ الوصول.");
         return false;
       }
 
-      alert("تم إرسال طلب الحجز بنجاح. سيتم التواصل معك قريباً.");
+      alert("✅ تم إرسال طلب الحجز بنجاح! سيتم التواصل معك قريباً.");
       return true;
     }
   </script>
